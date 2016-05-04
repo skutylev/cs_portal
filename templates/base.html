@@ -1,0 +1,14 @@
+{% load cms_tags sekizai_tags %}{% load menu_tags %}
+<html>
+  <head>
+      <title>{% page_attribute "page_title" %}</title>
+      {% render_block "css" %}
+  </head>
+  <body>
+      {% cms_toolbar %}
+      {% show_menu 0 100 100 100 %}
+      {% placeholder base_content %}
+      {% block base_content %}{% endblock %}
+      {% render_block "js" %}
+  </body>
+</html>
