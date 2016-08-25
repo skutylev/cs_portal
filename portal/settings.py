@@ -13,35 +13,41 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from os.path import abspath, basename, dirname, join, normpath
+
 gettext = lambda s: s
 
 SITE_ID = 1
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-7njamr@esnjf$-oo1h+!1u7j1ywh=qotyxzgup4@g1fn%h6#h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
 
+ACCOUNT_ACTIVATION_DAYS = 2
+AUTH_USER_EMAIL_UNIQUE = True
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'info@google.ru'
+
+
 # Application definition
 INSTALLED_APPS = (
-    # 'suit',
+    # poll apps
+    'registration',
+    'people_base',
     'djangocms_admin_style',
     'django.contrib.admin',
     'django.contrib.sites',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.auth',          # core of authentification framework
+    'django.contrib.contenttypes',  # assosiation with models
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'people_base',
     'ckeditor',
     'django_mptt_admin',
     'haystack',
@@ -66,11 +72,11 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', # manages sessions across requests
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # assos. users with requsts
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',   # logs user out of thier other sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -81,8 +87,8 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.language.LanguageCookieMiddleware',
 )
 
-
-ROOT_URLCONF = 'untitled3.urls'
+LOGIN_REDIRECT_URL = '/menu/'
+ROOT_URLCONF = 'portal.urls'
 
 TEMPLATES = [
     {
@@ -108,7 +114,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'untitled3.wsgi.application'
+WSGI_APPLICATION = 'portal.wsgi.application'
 
 
 # Database
@@ -161,39 +167,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 
-# SUIT_CONFIG = {
-#     # header
-#     'ADMIN_NAME': 'ФКН ВШЭ',
-#     'HEADER_DATE_FORMAT': 'l, j E Y',
-#     'HEADER_TIME_FORMAT': 'H:i',
-# }
-
-# LDAP_SERVERS = [
-#     # {
-#     #     'host': '192.168.0.13',
-#     #     'port': 389,
-#     #     'use_ssl': False,
-#     # },
-#     {
-#         'host': '172.16.1.2',
-#         'port': 389,
-#         'use_ssl': False,
-#     },
-# ]
-#
-# # LDAP_BIND_USER = "CN=Кутылев С.А.,OU=Administrators,OU=MITHT,DC=vuz,DC=mitht,DC=ru"
-# LDAP_BIND_USER = "CN=Кутылев С.А.,OU=Administrators,OU=MITHT,DC=vuz,DC=mitht,DC=ru"
-# LDAP_BIND_PWD = "ReNsKtDcThUtQ1988"
-# LDAP_SEARCH_BASE = "OU=Administrators,OU=MITHT,DC=vuz,DC=mitht,DC=ru"
-# LDAP_USER_SEARCH_FILTER = "(&(sAMAccountName=%s)(objectClass=user))"
-# LDAP_ATTRIBUTES_MAP = {
-#     'username': 'sAMAccountName',
-#     'first_name': 'givenName',
-#     'last_name': 'sn',
-#     'email': 'mail',
-# }
-
 CMS_TEMPLATES = (
     ('template_1.html', 'Template One'),
-    ('template_2.html', 'Template Two'),
+    #('template_2.html', 'Template Two'),
 )

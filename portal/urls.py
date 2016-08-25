@@ -13,11 +13,14 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+import portal.views as custom_views
 from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^report_builder/', include('report_builder.urls')),
-    url(r'^', include('cms.urls')),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^menu/', custom_views.main_page),
+    url(r'^', include('cms.urls')), # redirect
 ]

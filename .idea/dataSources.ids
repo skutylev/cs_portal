@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="Django default" uuid="92fd64df-0a48-480e-9d84-484053d3efce">
-    <database-info product="SQLite" version="3.8.9" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
     <table name="allauth_emailaddress" schema="" catalog="" type="TABLE">
@@ -83,19 +83,18 @@
       <index name="auth_user_user_permissions_e8701ad4" unique="true" columns="user_id"/>
     </table>
     <table name="cms_aliaspluginmodel" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="plugin_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="alias_placeholder_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
-      <foreign-key name="#FAKE_cms_aliaspluginmodel_1" columns="alias_placeholder_id" ref-table="cms_placeholder" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_cms_aliaspluginmodel_2" columns="plugin_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_cms_aliaspluginmodel_3" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_cms_aliaspluginmodel_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_cms_aliaspluginmodel_2" columns="alias_placeholder_id" ref-table="cms_placeholder" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_cms_aliaspluginmodel_3" columns="plugin_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="cms_aliaspluginmodel_921abf5c" unique="true" columns="alias_placeholder_id"/>
       <index name="cms_aliaspluginmodel_b25eaab4" unique="true" columns="plugin_id"/>
     </table>
     <table name="cms_cmsplugin" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="position" sqlType="SMALLINT UNSIGNED" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="language" sqlType="VARCHAR(15)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="plugin_type" sqlType="VARCHAR(50)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="creation_date" sqlType="DATETIME" precision="0" scale="-1" nullable="false" jdbcType="12"/>
@@ -105,6 +104,7 @@
       <column name="depth" sqlType="INTEGER UNSIGNED" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="numchild" sqlType="INTEGER UNSIGNED" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="path" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="position" sqlType="SMALLINT UNSIGNED" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_cms_cmsplugin_1" columns="placeholder_id" ref-table="cms_placeholder" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_cms_cmsplugin_2" columns="parent_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -239,12 +239,12 @@
       <index name="cms_placeholder_5e97994e" unique="true" columns="slot"/>
     </table>
     <table name="cms_placeholderreference" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="placeholder_ref_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
-      <foreign-key name="#FAKE_cms_placeholderreference_1" columns="placeholder_ref_id" ref-table="cms_placeholder" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_cms_placeholderreference_2" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_cms_placeholderreference_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_cms_placeholderreference_2" columns="placeholder_ref_id" ref-table="cms_placeholder" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="cms_placeholderreference_328d0afc" unique="true" columns="placeholder_ref_id"/>
     </table>
     <table name="cms_staticplaceholder" schema="" catalog="" type="TABLE">
@@ -349,11 +349,11 @@
       <primary-key columns="id"/>
     </table>
     <table name="djangocms_file_file" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="file" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="title" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="tooltip" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="target" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="tooltip" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
       <foreign-key name="#FAKE_djangocms_file_file_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
@@ -375,7 +375,6 @@
       <column name="zoom" sqlType="SMALLINT UNSIGNED" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="lat" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
       <column name="lng" sqlType="DECIMAL" precision="0" scale="-1" nullable="true" jdbcType="6"/>
-      <column name="route_planer_title" sqlType="VARCHAR(150)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="route_planer" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="width" sqlType="VARCHAR(6)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="height" sqlType="VARCHAR(6)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
@@ -387,6 +386,8 @@
       <column name="pan_control" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="zoom_control" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="street_view_control" sqlType="BOOL" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="style" sqlType="TEXT" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="route_planer_title" sqlType="VARCHAR(150)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <primary-key columns="cmsplugin_ptr_id"/>
       <foreign-key name="#FAKE_djangocms_googlemap_googlemap_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
@@ -404,17 +405,17 @@
       <column name="name" sqlType="VARCHAR(256)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="url" sqlType="VARCHAR(2048)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="anchor" sqlType="VARCHAR(128)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="mailto" sqlType="VARCHAR(254)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="phone" sqlType="VARCHAR(40)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="target" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="page_link_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="mailto" sqlType="VARCHAR(254)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="attributes" sqlType="TEXT" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <primary-key columns="cmsplugin_ptr_id"/>
       <foreign-key name="#FAKE_djangocms_link_link_1" columns="page_link_id" ref-table="cms_page" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_djangocms_link_link_2" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="djangocms_link_link_d916d256" unique="true" columns="page_link_id"/>
     </table>
     <table name="djangocms_picture_picture" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="url" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="alt" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
@@ -423,9 +424,10 @@
       <column name="page_link_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="height" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="width" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
-      <foreign-key name="#FAKE_djangocms_picture_picture_1" columns="page_link_id" ref-table="cms_page" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_djangocms_picture_picture_2" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_djangocms_picture_picture_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_djangocms_picture_picture_2" columns="page_link_id" ref-table="cms_page" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="djangocms_picture_picture_d916d256" unique="true" columns="page_link_id"/>
     </table>
     <table name="djangocms_snippet_snippet" schema="" catalog="" type="TABLE">
@@ -437,11 +439,11 @@
       <primary-key columns="id"/>
     </table>
     <table name="djangocms_snippet_snippetptr" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="snippet_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
-      <foreign-key name="#FAKE_djangocms_snippet_snippetptr_1" columns="snippet_id" ref-table="djangocms_snippet_snippet" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_djangocms_snippet_snippetptr_2" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_djangocms_snippet_snippetptr_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_djangocms_snippet_snippetptr_2" columns="snippet_id" ref-table="djangocms_snippet_snippet" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="djangocms_snippet_snippetptr_cfd011c9" unique="true" columns="snippet_id"/>
     </table>
     <table name="djangocms_teaser_teaser" schema="" catalog="" type="TABLE">
@@ -457,13 +459,12 @@
       <index name="djangocms_teaser_teaser_d916d256" unique="true" columns="page_link_id"/>
     </table>
     <table name="djangocms_text_ckeditor_text" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="body" sqlType="TEXT" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
       <foreign-key name="#FAKE_djangocms_text_ckeditor_text_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
     <table name="djangocms_video_video" schema="" catalog="" type="TABLE">
-      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <column name="movie" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="movie_url" sqlType="VARCHAR(255)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <column name="image" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
@@ -481,6 +482,7 @@
       <column name="buttonoutcolor" sqlType="VARCHAR(6)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="buttonovercolor" sqlType="VARCHAR(6)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
       <column name="buttonhighlightcolor" sqlType="VARCHAR(6)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="cmsplugin_ptr_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
       <primary-key columns="cmsplugin_ptr_id"/>
       <foreign-key name="#FAKE_djangocms_video_video_1" columns="cmsplugin_ptr_id" ref-table="cms_cmsplugin" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
@@ -562,6 +564,13 @@
       <index name="people_base_unit_656442a0" unique="true" columns="tree_id"/>
       <index name="people_base_unit_3cfbd988" unique="true" columns="rght"/>
       <index name="people_base_unit_caf7cc51" unique="true" columns="lft"/>
+    </table>
+    <table name="registration_registrationprofile" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="activation_key" sqlType="VARCHAR(40)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_registration_registrationprofile_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
     <table name="report_builder_displayfield" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
@@ -671,6 +680,7 @@
       <column name="calendar_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="creator_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
       <column name="rule_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="color_event" sqlType="VARCHAR(10)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_schedule_event_1" columns="rule_id" ref-table="schedule_rule" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_schedule_event_2" columns="creator_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
