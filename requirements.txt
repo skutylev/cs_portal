@@ -43,7 +43,7 @@ djangorestframework==3.4.1
 easy-thumbnails==2.3
 elasticsearch==2.3.0
 future==0.15.2
-html5lib==0.9999999
+html5lib==0.999999999
 icalendar==3.10
 jdcal==1.2
 oauthlib==1.1.2
